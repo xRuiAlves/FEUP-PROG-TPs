@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
@@ -13,8 +15,77 @@ int dmas(long long int n);
 int sizeOfNum(long long int n);
 bool capicua(int n);
 int fac(int n);
+double distance(double x1, double y1, double x2, double y2);
+double area(double x1, double y1, double x2, double y2, double x3, double y3);
+bool isPrime(int n);
 
 int main() {
+
+	
+	/*
+	Exercicio 3.2
+	
+	int num;
+
+	cout << "Insira um numero para testar se e primo: ";
+	cin >> num;
+
+	if (isPrime(num)) {
+		cout << endl << "Primo!!" << endl << endl;
+	}
+	else {
+		cout << endl << "Nao e primo... " << endl << endl;
+	}*/
+
+
+	/*
+	Exercicio 3.1
+	double x1, y1, x2, y2, x3, y3;
+	cout << "Insira as coordenadas do ponto 1: ";
+	cin >> x1 >> y1;
+	cout << "Insira as coordenadas do ponto 2: ";
+	cin >> x2 >> y2;
+	cout << "Insira as coordenadas do ponto 3: ";
+	cin >> x3 >> y3;
+
+	cout << endl << "A area do triangulo e " << area(x1, y1, x2, y2, x3, y3) << " ." << endl << endl;*/
+
+
+	/*
+	Exercicio 2.15
+	srand(time(NULL));
+
+
+	int n1 = rand()%8 + 2;
+	int n2 = rand() % 8 + 2;
+	int guess, rw = n1*n2;
+
+
+
+	long long int ti = time(0);
+	
+	cout << n1 << " * " << n2 << " ? ";
+	cin >> guess;
+
+	long long int tf = time(0) - ti;
+
+	cout << endl << "Tempo da resposta: " << tf << " segundos!!" << endl << endl;
+
+	if (guess != rw) {
+		cout << "Muito mau! " << endl << endl;
+	}
+	else if (tf < 5) {
+		cout << "Bom! " << endl << endl;
+	}
+	else if (tf <= 10) {
+		cout << "Satisfaz! " << endl << endl;
+	}
+	else {
+		cout << "Insuficiente...! " << endl << endl;
+	}*/
+
+
+
 
 
 
@@ -531,18 +602,18 @@ int main() {
 	cout << "A-media = " << fixed << a - media << endl;
 	cout << "B-media = " << fixed << b - media << endl;
 	cout << "C-media = " << fixed << c - media << endl;
-
+	
 
 
 	
 	Exercício 1.1
-
+	*/
 	char c;
 
 	cout << "Enter a char: ";
 	cin >> c;
 	cout << endl << "->  " << (int) c << endl;
-	*/
+	
 
 	return 0;
 
@@ -602,4 +673,27 @@ int fac(int n) {
 	}
 
 	return res;
+}
+
+double distance(double x1, double y1, double x2, double y2){
+	double resultado = sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+
+	return resultado;
+}
+double area(double x1, double y1, double x2, double y2, double x3, double y3) {
+	double a = distance(x1, y1, x2, y2);
+	double b = distance(x1, y1, x3, y3);
+	double c = distance(x2, y2, x3, y3);
+	double s = (a + b + c) / 2;
+	double area = sqrt(s*(s - a)*(s - b)*(s - c));
+
+	return area;
+}
+
+bool isPrime(int n) {
+	for (int i = 2; i < n/2 ; i++) {
+		if (n%i == 0)
+			return false;
+	}
+	return true;
 }
