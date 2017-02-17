@@ -18,9 +18,42 @@ int fac(int n);
 double distance(double x1, double y1, double x2, double y2);
 double area(double x1, double y1, double x2, double y2, double x3, double y3);
 bool isPrime(int n);
+int casasDecimais(long double n);
+double raiz(double n, int nMaxIter, double delta);
+double round(double x, int n);
 
 int main() {
 
+
+
+
+	/*Exercicio 3.4
+	double x, result;
+	int n;
+
+	cout << "Insira um valor 'x' para arredondar e a quantidade 'n' de casas \ndecimais do arredondamento, separados por um espaco: ";
+	cin >> x >> n;
+
+	result = round(x, n);
+
+	cout << "\nResultado do arredondamento: " << result << endl << endl;*/
+
+
+
+	/*Exercicio 3.3 A e B
+	double n, delta;
+	int nMaxIter;
+
+	cout << "Indique o valor de n(raiz a calcular): ";
+	cin >> n;
+	cout << "Indique a quantidade de iteracoes: ";
+	cin >> nMaxIter;
+	cout << "Indique o delta de paragem: ";
+	cin >> delta;
+
+	cout << "\nResultado: " << raiz(n, nMaxIter, delta) << endl << endl;
+
+	cout << "Diferença para a raiz quadrada original: " << abs(sqrt(n) - raiz(n, nMaxIter, delta)) << endl << endl;*/
 	
 	/*
 	Exercicio 3.2
@@ -85,6 +118,32 @@ int main() {
 	}*/
 
 
+	/*Exercicio 2.14 A e B
+
+	double n, delta, diff, rq=1, rqn;
+	int c=0, nMaxIter;
+	
+	
+
+	cout << "Indique o valor de n(raiz a calcular): ";
+	cin >> n;
+	cout << "Indique a quantidade de iteracoes: ";
+	cin >> nMaxIter;
+	cout << "Indique o delta de paragem: ";
+	cin >> delta;
+
+	int resultprecision = casasDecimais(delta);
+	cout.precision(resultprecision);
+	cout << fixed;
+
+	do {
+		rqn = (rq + n / rq) / 2;
+		rq = rqn;
+		diff = abs( n - (rq*rq));
+		c++;
+	} while (c < nMaxIter && diff >= delta);
+
+	cout << "\nSolucao: " << rq << endl << endl;*/
 
 
 
@@ -607,14 +666,12 @@ int main() {
 
 	
 	Exercício 1.1
-	*/
 	char c;
 
 	cout << "Enter a char: ";
 	cin >> c;
-	cout << endl << "->  " << (int) c << endl;
+	cout << endl << "->  " << (int) c << endl;*/
 	
-
 	return 0;
 
 }
@@ -696,4 +753,56 @@ bool isPrime(int n) {
 			return false;
 	}
 	return true;
+}
+
+int casasDecimais(long double n) {
+	
+	int c = 0;
+
+
+	while (n - (int)n != 0) {
+		c++;
+		n *= 10;
+	}
+
+	return c;
+
+}
+
+double raiz(double n, int nMaxIter, double delta) {
+
+	double diff, rq=1, rqn;
+	int c=0;
+
+
+	int resultprecision = casasDecimais(delta);
+	cout.precision(resultprecision);
+	cout << fixed;
+
+	do {
+	rqn = (rq + n / rq) / 2;
+	rq = rqn;
+	diff = abs( n - (rq*rq));
+	c++;
+	} while (c < nMaxIter && diff >= delta);
+
+	return rq;
+}
+
+double round(double x, int n) {
+	
+	double result;
+	
+	x = x * pow(10, n);
+	
+	double temp = x * 10;
+	int casa = (int)temp % 10;
+	
+	x = (int)x;
+
+	if (casa % 10 >= 5)
+		x++;
+	result = x / (pow(10, n));
+
+	return result;
 }
