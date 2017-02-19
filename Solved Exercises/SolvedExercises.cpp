@@ -24,7 +24,6 @@ double raiz(double n, int nMaxIter, double delta);
 double round(double x, int n);
 bool readFracc(int &numerator, int &denominator);
 void writeFracc(int numerator, int denominator);
-unsigned int GCD(unsigned int a, unsigned int b);
 void reduceFracc(int &numerator, int &denominator);
 void somaFracc(int n1, int d1, int n2, int d2);
 void subFracc(int n1, int d1, int n2, int d2);
@@ -35,12 +34,127 @@ int ndias(int mes, int ano);
 int diasemana(int d, int m, int a);
 string returndia(int ds);
 void returnmes(int mes);
+int factorial_ite(int n);
+int factorial_rec(int n);
+unsigned int euclides(unsigned int m,unsigned int n);
+double integrateTR(double (f)(double), double a, double b, int n);
+double gx(double n);
+double hx(double n);
+bool isHydroxide(char compound[]);
+bool isHydroxide(string compound);
+bool sequenceSearch(string s, int nc, char c);
+
+
 
 
 int main() {
+
+	/*
+	Exercicio 4.2
+	string frase;
+	char c;
+	int nc;
+
+	while (true) {
+		cout << "Frase ? ";
+		getchar();
+		getline(cin, frase);
+		cout << "Carater ? ";
+		cin >> c;
+		cout << "Numero carateres ? ";
+		cin >> nc;
+
+		cout << endl;
+
+		if (sequenceSearch(frase, nc, c))
+			cout << "Yap!" << endl << endl;
+		else
+			cout << "Nope!" << endl << endl;
+	}*/
+
+
+
+	/*
+	Exercicio 4.1 B
+	string s1 = "KOH";
+	string s2 = "H2O2";
+	string s3 = "NaCL";
+	string s4 = "NaOH";
+	string s5 = "C9H8O4";
+	string s6 = "MgOH";
+
+	cout << "KOH: " << isHydroxide(s1) << endl;
+	cout << "H2O2: " << isHydroxide(s2) << endl;
+	cout << "NaCL: " << isHydroxide(s3) << endl;
+	cout << "NaOH: " << isHydroxide(s4) << endl;
+	cout << "C9H8O4: " << isHydroxide(s5) << endl;
+	cout << "MgOH: " << isHydroxide(s6) << endl << endl;*/ 
+
+
+	/*
+	Exercicio 4.1 A
+	char c1[] = "KOH";
+	char c2[] = "H2O2";
+	char c3[] = "NaCL";
+	char c4[] = "NaOH";
+	char c5[] = "C9H8O4";
+	char c6[] = "MgOH";
+
+
+	cout << "KOH: " << isHydroxide(c1) << endl;
+	cout << "H2O2: " << isHydroxide(c2) << endl;
+	cout << "NaCL: " << isHydroxide(c3) << endl;
+	cout << "NaOH: " << isHydroxide(c4) << endl;
+	cout << "C9H8O4: " << isHydroxide(c5) << endl;
+	cout << "MgOH: " << isHydroxide(c6) << endl << endl;*/
+
+
+
+	/*
+	Exercicio 3.9
+	double a, b;
+	int n;
+
+	cout << "g(x)\n\n";
+	a = 0;
+	b = 10;
+	n = 2;
+	for (n = 2; n <= 128; n *= 2) {
+		cout << "N = " << n << " :  " << integrateTR(gx, a, b, n) << endl;
+	}
+
+	cout << "\n\nh(x)\n\n";
+	a = -2;
+	b = 2;
+	n = 2;
+	for (n = 2; n <= 128; n *= 2) {
+		cout << "N = " << n << " :  " << integrateTR(hx, a, b, n) << endl;
+	}*/
+
+	/*
+	Exercicio 3.8
+	int a, b;
+	while (true) {
+		cout << "> ";
+		cin >> a >> b;
+		cout << "\nEuc: " << euclides(a, b) << endl;
+	}*/
+
+
+	/*
+	Exercicio 3.7 A e B
+	long int n;
 	
-/*	
-	Exercicio 3.7 D e E
+	cout << "N: ";
+	cin >> n;
+
+	cout << "\nIte: " << factorial_ite(n) << endl;
+	cout << "\nRec: " << factorial_rec(n) << endl;*/
+
+	
+	
+	/*
+	Exercicio 3.6 D e E
 	int ano;
 
 	cout << "Insira um ano: ";
@@ -947,29 +1061,10 @@ void writeFracc(int numerator, int denominator) {
 	cout << numerator << "/" << denominator;
 }
 
-unsigned int GCD(unsigned int a, unsigned int b){
-	
-	if (a < b)
-	{
-		a += b;
-		b = a - b;
-		a -= b;
-	}
 
-	if (b == 0) return a;
-
-	while (a % b != 0)
-	{
-		a += b;
-		b = a - b;
-		a -= b;
-		b %= a;
-	}
-	return b;
-}
 
 void reduceFracc(int &numerator, int &denominator) {
-	int gcd = GCD(numerator, denominator);
+	int gcd = euclides(numerator, denominator);
 	numerator /= gcd;
 	denominator /= gcd;
 }
@@ -1153,4 +1248,123 @@ void returnmes(int mes) {
 		cout << "Dezembro" << endl;
 		break;
 	}
+}
+
+int factorial_ite(int n) {
+	long int result = n;
+	
+	if (n == 0 || n==1)
+		return 1;
+	
+	for (long int i = (n - 1); i >= 2; i--) {
+		result *= i;
+	}
+	
+	return result;
+}
+
+int factorial_rec(int n) {
+	long int result;
+
+	if (n == 0) {
+		result = 1;
+		return result;
+	}
+	else {
+		result = n * factorial_rec(n - 1);
+		return result;
+	}
+}
+
+unsigned int euclides(unsigned int m,unsigned  int n) {
+
+	if (m < n) {
+		m += n;
+		n = m - n;
+		m -= n;
+	}
+
+	while (m%n != 0) {
+		m += n;
+		n = m - n;
+		m -= n;
+		n %= m;
+	}
+
+	return n;
+}
+
+double integrateTR(double (f)(double), double a, double b, int n) {
+	
+	double h = (b - a) / n;
+	double resultado = 0;
+
+	for (int i = 1; i <= n; i++) {
+		resultado += h / 2 * (f(a + (i - 1)*h) + f(a + i*h));
+	}
+
+	return resultado;
+}
+
+double gx(double n) {
+	return (n*n);
+}
+
+double hx(double n) {
+	return (sqrt(4 - (n*n)));
+}
+
+bool isHydroxide(char compound[]) {
+
+	int n = 0;
+
+	while (true) {
+		if (compound[n] == '\0') {
+			n++;
+			break;
+		}
+		n++;
+	}
+
+	if (n < 3)
+		return false;
+
+	if (compound[n - 2] == 'H' && compound[n - 3] == 'O')
+		return true;
+	else
+		return false;
+}
+
+bool isHydroxide(string compound) {
+	int n = compound.size();
+
+	if (n < 2)
+		return false;
+	if (compound.at(n - 1) == 'H' && compound.at(n - 2) == 'O')
+		return true;
+	else
+		return false;
+}
+
+bool sequenceSearch(string s, int nc, char c) {
+	int n = s.size();
+	bool ret = false;
+
+	for (int i = 0; i < n; i++) { // tantas iteracoes quanto carateres
+		if (s.at(i) == c) {   // se o carater atual for o desejado
+			for (int j = i; j < i + nc; j++) {   //ver se ha nc carateres seguidos iguais a c
+				if (s.at(j) == c) {   //se o carater atual for o desejado, ret fica a true temporariamente
+					ret = true;
+				}
+				else {       // mal encontra um carater nao desejado nos "nc" carateres a seguir a um desejado, sai do loop
+					ret = false;
+					break;
+				}
+			}
+		}
+		if (ret)   // se ja tiver encontrado uma sequencia de nc carateres iguais a c, retorna true
+			return ret;
+	}
+
+	return ret; // nao encontrou a sequencia
 }
