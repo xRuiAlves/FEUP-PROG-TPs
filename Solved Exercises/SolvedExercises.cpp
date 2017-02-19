@@ -3,6 +3,7 @@
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include <string>
 
 using namespace std;
 
@@ -21,11 +22,127 @@ bool isPrime(int n);
 int casasDecimais(long double n);
 double raiz(double n, int nMaxIter, double delta);
 double round(double x, int n);
+bool readFracc(int &numerator, int &denominator);
+void writeFracc(int numerator, int denominator);
+unsigned int GCD(unsigned int a, unsigned int b);
+void reduceFracc(int &numerator, int &denominator);
+void somaFracc(int n1, int d1, int n2, int d2);
+void subFracc(int n1, int d1, int n2, int d2);
+void multFracc(int n1, int d1, int n2, int d2);
+void divFracc(int n1, int d1, int n2, int d2);
+bool bissexto(int n);
+int ndias(int mes, int ano);
+int diasemana(int d, int m, int a);
+string returndia(int ds);
+void returnmes(int mes);
+
 
 int main() {
+	
+/*	
+	Exercicio 3.7 D e E
+	int ano;
+
+	cout << "Insira um ano: ";
+	cin >> ano;
+
+	cout << "\n ***************************" << endl;
+	cout << " ********** " << ano << " ***********" << endl;
+	cout << " ***************************\n\n" << endl;
+
+
+	for (int j = 1; j <= 12; j++) {
+		int d = 2;
+		int dt = ndias(j, ano), primeirodia = diasemana(1, j, ano);
+
+
+		cout << "\n";
+		returnmes(j);
+		
+		cout << "\tDom\tSeg\tTer\tQua\tQui\tSex\tSab" << endl;
+
+		switch (primeirodia) {
+		case 0:
+			cout << "\t\t\t\t\t\t\t";
+			break;
+		case 1:
+			cout << "\t";
+			break;
+		case 2:
+			cout << "\t\t";
+			break;
+		case 3:
+			cout << "\t\t\t";
+			break;
+		case 4:
+			cout << "\t\t\t\t";
+			break;
+		case 5:
+			cout << "\t\t\t\t\t";
+			break;
+		case 6:
+			cout << "\t\t\t\t\t\t";
+		}
+
+		cout << "1";
+
+		while (d <= dt) {
+			if (diasemana(d, j, ano) == 1)
+				cout << "\n\t" << d;
+			else
+				cout << "\t" << d;
+			d++;
+		}
+		cout << endl << endl;
+	}*/
+
+	/*
+	Exercicio 3.6 C
+	int d, m, a;
+	string s;
+
+	cout << "Insira o dia mes e ano, separados por um espaco: ";
+	cin >> d >> m >> a;
+	
+	int ds = diasemana(d, m, a);
+	s = returndia(ds);
+
+	cout << "\nO dia da semana: " << s << endl << endl;*/
 
 
 
+	/*
+	Exercicio 3.5
+	int n1, d1, n2, d2, op;
+
+	cout << "Insira a primeira fracao: ";
+	readFracc(n1, d1);
+	cout << "Insira a segunda fracao: ";
+	readFracc(n2, d2);
+	
+
+	do {
+		cout << "Que operacao deseja efetuar?\n1.Soma\n2.Subtracao\n3.Multiplicacao\n4.Divisao\n";
+		cin >> op;
+	} while (op <= 0 || op > 4);
+
+	cout << endl << "Resposta: ";
+	switch (op) {
+	case 1:
+		somaFracc(n1, d1, n2, d2);
+		break;
+	case 2:
+		subFracc(n1, d1, n2, d2);
+		break;
+	case 3:
+		multFracc(n1, d1, n2, d2);
+		break;
+	case 4:
+		divFracc(n1, d1, n2, d2);
+	}
+	cout << endl << endl;*/
+	
+	
 
 	/*Exercicio 3.4
 	double x, result;
@@ -805,4 +922,235 @@ double round(double x, int n) {
 	result = x / (pow(10, n));
 
 	return result;
+}
+
+bool readFracc(int &numerator, int &denominator) {
+	
+	int num, den;
+	char c;
+	
+	cin >> num >> c >> den;
+	
+	if (c == '/') {
+		numerator = num;
+		denominator = den;
+		return true;
+	}
+	else {
+		numerator = 0;
+		denominator = 0;
+		return false;
+	}
+}
+
+void writeFracc(int numerator, int denominator) {
+	cout << numerator << "/" << denominator;
+}
+
+unsigned int GCD(unsigned int a, unsigned int b){
+	
+	if (a < b)
+	{
+		a += b;
+		b = a - b;
+		a -= b;
+	}
+
+	if (b == 0) return a;
+
+	while (a % b != 0)
+	{
+		a += b;
+		b = a - b;
+		a -= b;
+		b %= a;
+	}
+	return b;
+}
+
+void reduceFracc(int &numerator, int &denominator) {
+	int gcd = GCD(numerator, denominator);
+	numerator /= gcd;
+	denominator /= gcd;
+}
+
+void somaFracc(int n1, int d1, int n2, int d2) {
+	int temp = d1;
+	n1 *= d2;
+	d1 *= d2;
+	n2 *= temp;
+	d2 *= temp;
+	int denom = d2;
+	int num = n1 + n2;
+	reduceFracc(num, denom);
+	writeFracc(num, denom);
+
+}
+
+void subFracc(int n1, int d1, int n2, int d2) {
+	int temp = d1;
+	n1 *= d2;
+	d1 *= d2;
+	n2 *= temp;
+	d2 *= temp;
+	int denom = d2;
+	int num = n1 - n2;
+	reduceFracc(num, denom);
+	writeFracc(num, denom);
+}
+
+void multFracc(int n1, int d1, int n2, int d2) {
+	int num = n1*n2;
+	int denom = d1*d2;
+	reduceFracc(num, denom);
+	writeFracc(num, denom);
+}
+
+void divFracc(int n1, int d1, int n2, int d2) {
+	int num = n1*d2;
+	int denom = d1*n2;
+	reduceFracc(num, denom);
+	writeFracc(num, denom);
+}
+
+bool bissexto(int n) {
+	if ((n % 4 == 0 && n % 100 != 0) || n % 400 == 0)
+		return true;
+	else 
+		return false;
+}
+
+int ndias(int mes, int ano) {
+	if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+		return 31;
+	}
+	else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+		return 30;
+	}
+	else {
+		if (bissexto(ano))
+			return 29;
+		return 28;
+	}
+
+}
+
+int diasemana(int d, int m, int a) {
+	
+	int c;
+	int s = a / 100;
+	int ano = a % 100;
+	int floor = (5 * ano) / 4;
+
+	switch (m) {
+	case 1:
+		if (bissexto(a))
+			c = 6;
+		else
+			c = 0;
+		break;
+	case 2:
+		if (bissexto(a))
+			c = 2;
+		else
+			c = 3;
+		break;
+	case 3:
+		c = 3;
+		break;
+	case 4:
+		c = 6;
+		break;
+	case 5:
+		c = 1;
+		break;
+	case 6:
+		c = 4;
+		break;
+	case 7:
+		c = 6;
+		break;
+	case 8:
+		c = 2;
+		break;
+	case 9:
+		c = 5;
+		break;
+	case 10:
+		c = 0;
+		break;
+	case 11:
+		c = 3;
+		break;
+	case 12:
+		c = 5;
+	}
+
+	return ((floor + c + d - 2 * (s % 4) + 7) % 7);
+}
+
+string returndia(int ds) {
+	switch (ds) {
+	case 0:
+		return "Sabado";
+		break;
+	case 1:
+		return "Domingo";
+		break;
+	case 2:
+		return "Segunda-Feira";
+		break;
+	case 3:
+		return "Terca-Feira";
+		break;
+	case 4:
+		return "Quarta-Feira";
+		break;
+	case 5:
+		return "Quinta-Feira";
+		break;
+	case 6:
+		return "Sexta-Feira";
+	}
+}
+
+void returnmes(int mes) {
+	switch (mes) {
+	case 1:
+		cout << "Janeiro" << endl;
+		break;
+	case 2:
+		cout << "Fevereiro" << endl;
+		break;
+	case 3:
+		cout << "Marco" << endl;
+		break;
+	case 4:
+		cout << "Abril" << endl;
+		break;
+	case 5:
+		cout << "Maio" << endl;
+		break;
+	case 6:
+		cout << "Junho" << endl;
+		break;
+	case 7:
+		cout << "Julho" << endl;
+		break;
+	case 8:
+		cout << "Agosto" << endl;
+		break;
+	case 9:
+		cout << "Setembro" << endl;
+		break;
+	case 10:
+		cout << "Outubro" << endl;
+		break;
+	case 11:
+		cout << "Novembro" << endl;
+		break;
+	case 12:
+		cout << "Dezembro" << endl;
+		break;
+	}
 }
