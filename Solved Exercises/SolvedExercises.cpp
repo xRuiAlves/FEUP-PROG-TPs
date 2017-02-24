@@ -4,6 +4,10 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
 
 using namespace std;
 
@@ -36,18 +40,296 @@ string returndia(int ds);
 void returnmes(int mes);
 int factorial_ite(int n);
 int factorial_rec(int n);
-unsigned int euclides(unsigned int m,unsigned int n);
+unsigned int euclides(unsigned int m, unsigned int n);
 double integrateTR(double (f)(double), double a, double b, int n);
 double gx(double n);
 double hx(double n);
 bool isHydroxide(char compound[]);
 bool isHydroxide(string compound);
 bool sequenceSearch(string s, int nc, char c);
+void decompose(string compound);
+string normalizeName(string name);
+void readIntArray(int a[], int nElem);
+void displayArray(const int a[], int nElem);
+int searchValueInIntArray(const int a[], int nElem, int value);
+int searchMultValuesInIntArray(const int a[], int nElem, int value, int index[]);
+void readIntVector(vector<int> &v, int nElem);
+void readIntVector(vector<int> &v);
+void displayVector(const vector<int> &v);
+int searchValueInVector(const vector<int> &v, int value);
+vector<int> searchMultValuesInIntVector(const vector<int> &v, int value);
+void intbubblesort(vector<int> &v);
+void bubblesort(vector<string> &v);
+void readStringVector(vector<string> &v);
+void displayVector(const vector<string> &v);
+void removeDuplicates(vector<int> &v);
+bool findElem(const vector<int> &v, int n);
+vector<string> readFile(string FileName);
+void writeFile(vector<string> &data, string fileName);
+vector<int> vecunion(const vector<int> &v1, const vector<int> &v2);
+vector<int> vecintersection(const vector<int> &v1, const vector<int> &v2);
+double executeOperation(string op);
+int binarySearch(const vector<string> &v, string value);
 
+struct Fraction {
+	int numerator;
+	int denominator;
+};
 
+Fraction readFraccS(int n1, int n2);
+void writeFraccS(Fraction f);
+void reduceFraccS(Fraction &f);
+void somaFraccS(Fraction f1, Fraction f2);
+void subFraccS(Fraction f1, Fraction f2);
+void multFraccS(Fraction f1, Fraction f2);
+void divFraccS(Fraction f1, Fraction f2);
 
 
 int main() {
+
+	/*
+	Exercicio 4.13
+	vector<string> fileData;
+	string fileName;
+
+	cout << "Insira o nome do ficheiro(ex: 'file_name.txt'): " << endl;
+	cin >> fileName;
+
+	cout << "\n\nData in the file: " << endl;
+	fileData = readFile(fileName);
+	displayVector(fileData);
+
+	bubblesort(fileData);
+
+	cout << "\n\nData sorted: " << endl;
+	displayVector(fileData);
+
+	writeFile(fileData, fileName);
+	*/
+
+	/*
+	Exericio 4.12
+	double res;
+	string op;
+
+	cout << "Insira uma operacao : " << endl;
+	getline(cin, op);
+
+	res = executeOperation(op);
+	cout << "\nRESULTADO: " << res << "\n\n";*/
+
+
+
+	/*
+	Exercicio 4.11
+	vector<int> v1, v2, vu, vi;
+
+	//Input para os vetores
+	cout << "Insira os valores para v1: " << endl;
+	readIntVector(v1);
+	cin.clear();
+	cout << "\nInsira os valores para v2: " << endl;
+	readIntVector(v2);
+
+
+	//Processar reunião e interseção
+	vu = vecunion(v1, v2);
+	vi = vecintersection(v1, v2);
+
+	//Display da reunião e interseção
+	cout << "\nReuniao: " << endl;
+	displayVector(vu);
+	cout << "\nIntersecao: " << endl;
+	displayVector(vi);
+
+	cout << "\n\n";
+	*/
+
+
+
+
+	/*
+	Exercicio 4.10
+	vector<int> vec;
+
+	cout << "Insira numero ('ctrl + z' para terminar): " << endl;
+	readIntVector(vec);
+
+	removeDuplicates(vec);
+	intbubblesort(vec);
+
+	cout << "Result: " << endl;
+	displayVector(vec);
+	
+	cout << "\n\n";*/
+
+	/*
+	Exericio 4.9
+	vector<string> vec;
+	string s;
+
+	//Construir vetor
+	cout << "Insira o vetor de nomes:\n";
+	readStringVector(vec);
+	cout << "\nO vetor que inseriu:\n";
+	displayVector(vec);
+
+	//Ordenar vetor
+	bubblesort(vec);
+	cout << "\n\nO vetor ordenado:\n";
+	displayVector(vec);
+
+	//Pedir elemento
+	cout << "\n\nInsira um elemento para procurar no vetor: ";
+	cin >> s;
+
+	//Display do resultado
+	cout << "Resultado: " << binarySearch(vec, s) << "\n\n";
+	*/
+	
+	/*
+	Exercicio 4.8
+	vector<string> s;
+	
+	cout << "Insira nomes ('ctrl+z' para terminar): " << endl;
+	readStringVector(s);
+
+	bubblesort(s);
+
+	cout << "\nResultado: ";
+	displayVector(s);
+	cout << endl << endl;*/
+
+	/*
+	Exercicio 4.7 A e B
+	vector<int> vec, ind;
+	int n, n2, v;
+
+	cout << "Insira o numero de elementos do vector: ";
+	cin >> n;
+	readIntVector(vec, n);
+
+	cout << "\nInsira um elemento para saber a posicao: ";
+	cin >> v;
+	n2 = searchValueInVector(vec, v);
+	cout << "Result: " << n2 << '\n';
+
+
+	cout << "\nInsira um elemento para saber as posicoes: ";
+	cin >> v;
+	ind = searchMultValuesInIntVector(vec, v);
+	displayVector(ind);
+	cout << '\n';*/
+	
+
+	
+	/*
+	Exercicio 4.6 E
+	int arr[100], ind[100];
+	int n, c, v;
+
+	cout << "Ola! Insira quantos elementos quer no seu array: ";
+	cin >> n;
+
+	readIntArray(arr, n);
+
+	cout << "\nInsira um numero para pesquisar no array: ";
+	cin >> v;
+
+	c = searchMultValuesInIntArray(arr, n, v, ind);
+
+	displayArray(ind, c);*/
+	
+
+	/*
+	Exercicio 4.6 C
+	int arr[100], n, v;
+
+	cout << "Ola! Insira quantos elementos quer no seu array: ";
+	cin >> n;
+
+	readIntArray(arr, n);
+
+	cout << "\nInsira um numero para pesquisar no array: ";
+	cin >> v;
+	
+	cout << "\nPosicao no array: " << searchValueInIntArray(arr, n, v) << endl << endl;*/
+
+	/*
+	Exercicio 4.5
+	int n1, n2, op;
+	char c;
+	Fraction f1,f2;
+
+	while (true) {
+		cout << "Insira a fracao 1 (n/d): ";
+		cin >> n1 >> c >> n2;
+		if (c == '/') {
+			f1 = readFraccS(n1, n2);
+			break;
+		}
+	}
+
+	while (true) {
+		cout << "Insira a fracao 2 (n/d): ";
+		cin >> n1 >> c >> n2;
+		if (c == '/') {
+			f2 = readFraccS(n1, n2);
+			break;
+		}
+	}
+
+	do {
+		cout << "Enter an operation: \n1. Soma\n2. Subtracao\n3. Multiplicacao\n4. Divisao\n";
+		cin >> op;
+	} while (op < 1 || op>4);
+
+	switch (op) {
+	case 1:
+		somaFraccS(f1, f2);
+		break;
+	case 2:
+		subFraccS(f1, f2);
+		break;
+	case 3:
+		multFraccS(f1, f2);
+		break;
+	case 4:
+		divFraccS(f1, f2);
+	}
+	cout << endl;*/
+	
+
+	/*
+	Exercicio 4.4
+	string s1;
+	
+	cout << "Introduza um nome para normalizar:" << endl;
+	getline(cin, s1);
+
+	cout << "\nResultado: " << normalizeName(s1) << endl << endl;
+	*/
+
+	/*
+	Exercicio 4.3
+	string s1 = "H2O";
+	string s2 = "KOH";
+	string s3 = "H2O2";
+	string s4 = "NaCl";
+	string s5 = "NaOH";
+	string s6 = "C9H8O4";
+	string s7 = "MgOH";
+
+	decompose(s1);
+	decompose(s2);
+	decompose(s3);
+	decompose(s4);
+	decompose(s5);
+	decompose(s6);
+	decompose(s7);
+
+	cout << endl;*/
+
 
 	/*
 	Exercicio 4.2
@@ -151,6 +433,7 @@ int main() {
 	cout << "\nIte: " << factorial_ite(n) << endl;
 	cout << "\nRec: " << factorial_rec(n) << endl;*/
 
+	
 	
 	
 	/*
@@ -1367,4 +1650,436 @@ bool sequenceSearch(string s, int nc, char c) {
 	}
 
 	return ret; // nao encontrou a sequencia
+}
+
+void decompose(string compound) {
+	int n = compound.size();
+
+	if (n > 0) {
+		cout << compound.at(0);
+		for (int i = 1; i < n; i++) {
+			char c = compound.at(i);
+			if (c >= 'A' && c <= 'Z')
+				cout << " " << compound.at(i);
+			else if (c >= 'a' && c <= '<')
+				cout << compound.at(i);
+		}
+	}
+
+	cout << endl << endl;
+}
+
+string normalizeName(string name) {
+
+	string arr[6] = { " DE ", " DO ", " DA ", " DAS ", " DOS " , " E " };
+
+	int n = name.size();
+	
+	while (name.at(0) == ' ') {    // limpar espacos no inicio
+		name.erase(name.begin());
+	}
+
+	n = name.size();
+
+	for (int i = (n - 1); i >= 0; i--) {   // limpar espacos no fim
+		if (name.at(i) == ' ')
+			name.erase(name.begin() + i);
+		else
+			break;
+	}
+
+
+	n = name.size();
+
+	for (int i = 0; i < n; i++) {   // trocar minusculas para maiusculas
+		char c1 = name.at(i);
+		int temp = (int)c1;
+		char c2 = (char)(c1 - 32);
+		string stemp = "";
+		stemp += c2;
+
+		if (c1 >= 'a' && c1 <= 'z')
+			name.replace(i, 1, stemp);
+	}
+
+
+	for (int i = 0; i <= 5; i++) {   // limpas elemetos no array
+		while (true) {
+			n = name.size();
+			if (n > 0) {
+				int temp = name.find(arr[i]);
+				if (temp >= 0 && temp < n)
+					name.erase(temp, (arr[i].size() - 1));
+				else
+					break;
+			}
+		}
+	}
+
+	while (true) {    // limpar duplos espacos
+		n = name.size();
+		if (n > 0) {
+			int temp = name.find("  ");
+			if (temp >= 0 && temp < n)
+				name.erase(temp, 1);
+			else
+				break;
+		}
+	}
+
+	return name;
+}
+
+
+
+Fraction readFraccS(int n1, int n2) {
+
+	Fraction f1 = { n1,n2 };
+
+	return f1;
+}
+
+void writeFraccS(Fraction f) {
+	cout << f.numerator << '/' << f.denominator;
+}
+
+void reduceFraccS(Fraction &f){
+	int gcd = euclides(f.numerator, f.denominator);
+	f.numerator /= gcd;
+	f.denominator /= gcd;
+}
+
+void somaFraccS(Fraction f1, Fraction f2) {
+	int temp = f2.denominator;
+	f2.numerator *= f1.denominator;
+	f2.denominator *= f1.denominator;
+	f1.denominator *= temp;
+	f1.numerator *= temp;
+	Fraction result = { f1.numerator + f2.numerator,f1.denominator };
+	reduceFraccS(result);
+	writeFraccS(result);
+}
+
+void subFraccS(Fraction f1, Fraction f2) {
+	int temp = f2.denominator;
+	f2.numerator *= f1.denominator;
+	f2.denominator *= f1.denominator;
+	f1.denominator *= temp;
+	f1.numerator *= temp;
+	Fraction result = { f1.numerator + f2.numerator,f1.denominator };
+	reduceFraccS(result);
+	writeFraccS(result);
+}
+
+void multFraccS(Fraction f1, Fraction f2) {
+	Fraction result;
+	result.numerator = f1.numerator * f2.numerator;
+	result.denominator = f1.denominator * f2.denominator;
+	reduceFraccS(result);
+	writeFraccS(result);
+}
+
+void divFraccS(Fraction f1, Fraction f2) {
+	Fraction result;
+	result.numerator = f1.numerator * f2.denominator;
+	result.denominator = f1.denominator * f2.numerator;
+	reduceFraccS(result);
+	writeFraccS(result);
+}
+
+void readIntArray(int a[], int nElem) {
+	for (int i = 0; i < nElem; i++) {
+		cout << "Elemento " << i << ": ";
+		cin >> a[i];
+	}
+}
+
+int searchValueInIntArray(const int a[], int nElem, int value) {
+	for (int i = 0; i < nElem; i++) {
+		if (a[i] == value)
+			return i;
+	}
+	return -1;
+}
+
+int searchMultValuesInIntArray(const int a[], int nElem, int value, int index[]) {
+	int c = 0;
+	for (int i = 0; i < nElem; i++) {
+		if (a[i] == value) {
+			index[c] = i;
+			c++;
+		}
+	}
+
+	return c;
+}
+
+void displayArray(const int a[], int nElem) {
+	for (int i = 0; i < nElem; i++) {
+		cout << "Elem. " << i << " :  " << a[i] << endl;
+	}
+}
+
+void readIntVector(vector<int> &v, int nElem) {
+	int n;
+
+	for (int i = 0; i < nElem; i++) {
+		cout << "Elemento " << i << ": ";
+		cin >> n;
+		v.push_back(n);
+	}
+}
+int searchValueInVector(const vector<int> &v, int value) {
+	for (int i = 0; i < v.size(); i++) {
+		if (v[i] == value)
+			return i;
+	}
+
+	return -1;
+}
+
+vector<int> searchMultValuesInIntVector(const vector<int> &v, int value) {
+	vector<int> v2;
+	for (int i = 0; i < v.size(); i++) {
+		if (v[i] == value) {
+			v2.push_back(i);
+		}
+	}
+
+	return v2;
+}
+
+void displayVector(const vector<int> &v) {
+	for (int i = 0; i < v.size(); i++) {
+		cout << v[i] << " ";
+	}
+}
+
+void intbubblesort(vector<int> &v) {
+	bool flag = true;
+	int size = v.size(), temp;
+	while (flag) {
+		flag = false;
+		for (int i = 0; i < (size - 1) ; i++) {
+			if (v[i + 1] < v[i]) {
+				flag = true;
+				v[i] += v[i + 1];
+				v[i + 1] = v[i] - v[i + 1];
+				v[i] -= v[i + 1];
+			}
+		}
+	}
+}
+
+void readIntVector(vector<int> &v) {
+	int n;
+
+	while (true) {
+		cout << "Elemento " << v.size() << ": ";
+		cin >> n;
+		if (cin.eof())
+			break;
+		v.push_back(n);
+	}
+}
+
+void bubblesort(vector<string> &v) {
+	bool flag = true;
+	int c;
+	string temp;
+
+	while (flag) {
+		flag = false;
+		for (int i = 0; i < (v.size() -1); i++) {
+			c = v[i+1].compare(v[i]);
+			if (c < 0) {
+				flag = true;
+				temp = v[i];
+				v[i] = v[i + 1];
+				v[i + 1] = temp;
+			}
+		}
+	}
+}
+
+void readStringVector(vector<string> &v) {
+	string s;
+
+	while (true) {
+		cout << "Elemento " << v.size() << ": ";
+		cin >> s;
+		if (cin.eof()) {
+			cin.clear();
+			break;
+		}
+		v.push_back(s);
+	}
+}
+
+void displayVector(const vector<string> &v) {
+	for (int i = 0; i < v.size(); i++) {
+		cout << v[i] << " ";
+	}
+}
+
+void removeDuplicates(vector<int> &v) {
+	vector<int> aux;
+
+	for (int i = 0; i < v.size(); i++) {
+		if (!findElem(aux, v[i])) {
+			aux.push_back(v[i]);
+		}
+	}
+
+	v = aux;
+}
+
+vector<string> readFile(string FileName) {
+
+	string linha;
+	vector<string> FileData;
+	ifstream inFile;
+	inFile.open(FileName);
+
+	while (!inFile.eof()) {
+		inFile >> linha;
+		FileData.push_back(linha);
+	}
+
+	inFile.close();
+
+	return FileData;
+
+
+
+}
+
+void writeFile(vector<string> &data, string fileName) {
+
+	string sorted = "_sorted";
+	for (int i = 0; i < sorted.size(); i++) {
+		fileName.insert(fileName.begin() + fileName.size() - 4, sorted.at(i));
+	}
+
+	ofstream outFile;
+	outFile.open(fileName);
+
+	for (int i = 0; i < data.size(); i++) {
+		outFile << data[i] << '\n';
+	}
+
+	outFile.close();
+
+
+}
+
+vector<int> vecunion(const vector<int> &v1, const vector<int> &v2) {
+	vector<int> vec;
+	
+	for (int i = 0; i < v1.size(); i++) {
+		vec.push_back(v1[i]);
+	}
+	for (int i = 0; i < v2.size(); i++) {
+		vec.push_back(v2[i]);
+	}
+
+	removeDuplicates(vec);
+	intbubblesort(vec);
+	
+	return vec;
+}
+vector<int> vecintersection(const vector<int> &v1, const vector<int> &v2) {
+	vector<int> vec2;
+
+	for (int i = 0; i < v1.size(); i++) {
+		if (findElem(v2, v1[i])) {
+			vec2.push_back(v1[i]);
+		}
+	}
+
+	removeDuplicates(vec2);
+	intbubblesort(vec2);
+
+	return vec2;
+}
+
+
+bool findElem(const vector<int> &v, int n) {
+	if (v.size() == 0)
+		return false;
+	for (int i = 0; i < v.size(); i++) {
+		if (v[i] == n)
+			return true;
+	}
+
+	return false;
+}
+
+double executeOperation(string op) {
+
+	double a, b, res = 1;
+	char c;
+	int p;
+
+	while (true) {
+		p = op.find(' ');
+
+		if (p < 0 || p >= op.size())
+			break;
+
+		op.erase(op.begin() + p);
+	}
+
+	stringstream ss;
+	ss << op;
+	ss >> a;
+	ss >> c;
+	ss >> b;
+	if (ss.eof())
+		cout << "zsofhjpous";
+
+	if (c != '+' && c != '-' && c != '*' && c != 'x' && c != '/' && c != ':' && c != '^') {
+		cout << "\nOperacao Invalida!! \n\n";
+		return 0;
+	}
+
+	switch (c) {
+	case '+':
+		return a + b;
+		break;
+	case '-':
+		return a - b;
+		break;
+	case '*':
+	case 'x':
+		return a * b;
+		break;
+	case '^':
+		return pow(a, b);
+		break;
+	case '/':
+	case ':':
+		return a / b;
+	}
+	
+}
+
+int binarySearch(const vector<string> &v, string value) {
+	int bottom = 0, top = (v.size() - 1), middle;
+
+	while (bottom <= top) {
+		
+		middle = (top + bottom) / 2;
+
+		
+		if (v[middle] == value) {
+			return middle;
+		} else if (v[middle].compare(value) < 0) {
+			bottom = middle + 1;
+		} else {
+			top = middle - 1;
+		}
+	}
+
+	return -1;
 }
