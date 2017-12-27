@@ -6,3 +6,6 @@ In this Curricular Unit the programming language used is C++, allthough there ar
 
 
 EDIT: The "Solved Exercises" folder isn't very organized - The repository was created at a time that I didn't understand how to correctly use Git, which made this whole repository somewhat messy.
+
+
+<b>Final Grade: 19</b>
