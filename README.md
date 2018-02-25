@@ -1,4 +1,4 @@
-# PROG
+# Programação / Programming 2016-2017
 Exercises solved during classes in the PROG curricular unit.
 <br/><b>Final Grade: 19</b>
 
